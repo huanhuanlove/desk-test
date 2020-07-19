@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="../static/css/normalize.css" th:href="@{../static/css/normalize.css}">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="mytable">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>电话</th>
+                    <th>邮箱</th>
+                    <th>密码</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="item, userStat : ${users}">
+                    <td style="display: none" th:text="${item.id}">23</td>
+                    <td th:text="${item.username}">张三</td>
+                    <td th:text="${item.mobile}">25</td>
+                    <td th:text="${item.email}">zs@163.com</td>
+                    <td th:text="${item.password}">zs@163.com</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button class="btn btn-info" id="add"><i class="fa fa-plus"></i> 添加新的表格行</button>
+    </header>
+</div>
+
+
+
+<script type="text/javascript" src="../static/js/jquery-1.11.0.min.js" th:src="@{../static/js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstable.js" th:src="@{../static/js/bootstable.js}"></script>
+<script>
+    $('#mytable').SetEditable({
+        columnsEd: "0,1,2",  //编辑第一和第二列和第三列
+        $addButton: $('#but_add'),
+        onEdit: function(res) {
+            console.log("编辑表格");
+            console.log("获取当前行的第几个元素值" + $('#editing input:eq(1)').val());
+            $.ajax({
+                url: "/user/updateUser",
+                data: {
+                    id: $('#editing input').val(),
+                    username: $('#editing input:eq(1)').val(),
+                    mobile: $('#editing input:eq(2)').val(),
+                    email: $('#editing input:eq(4)').val()
+                },
+                dataType: "json",
+                type: "post",
+                success: function (res) {
+                    console.log("修改成功");
+                },
+                error: function (res) {
+                    console.log("修改失败" + res.message);
+                }
+            })
+        },
+        onBeforeDelete: function () {
+            alert("确认删除");
+        }
+    });
+
+   /* 可配置参数
+   $('#mytable').SetEditable({
+        columnsEd: null,         //Index to editable columns. If null all td editables. Ex.: "1,2,3,4,5"
+        $addButton: null,        //Jquery object of "Add" button
+        onEdit: function() {},   //Called after edition
+        onBeforeDelete: function() {}, //Called before deletion
+        onDelete: function() {}, //Called after deletion
+        onAdd: function() {}     //Called when added a new row
+    });
+    columnsEd：需要进行编辑的表格列的序号。
+    $addButton：添加表格行的按钮的jquery对象。
+    onEdit：编辑表格时的回调函数。
+    onBeforeDelete：删除表格行前的回调函数。
+    onDelete：删除表格行后的回调函数。
+    onAdd：添加一个新的表格行前的回调函数。*/
+</script>
+
+</body>
+</html>

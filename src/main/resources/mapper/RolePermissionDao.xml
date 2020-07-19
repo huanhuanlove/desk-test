@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shiro1.dao.RolePermissionDao">
+
+    <resultMap type="com.example.shiro1.entity.RolePermission" id="RolePermissionMap">
+        <result property="permitId" column="permit_id" jdbcType="OTHER"/>
+        <result property="roleId" column="role_id" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RolePermissionMap">
+        select
+          permit_id, role_id
+        from shiro1.role_permission
+        where permit_id = #{permitId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RolePermissionMap">
+        select
+          permit_id, role_id
+        from shiro1.role_permission
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RolePermissionMap">
+        select
+          permit_id, role_id
+        from shiro1.role_permission
+        <where>
+            <if test="permitId != null">
+                and permit_id = #{permitId}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="permitId" useGeneratedKeys="true">
+        insert into shiro1.role_permission()
+        values ()
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update shiro1.role_permission
+        <set>
+        </set>
+        where permit_id = #{permitId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from shiro1.role_permission where permit_id = #{permitId}
+    </delete>
+
+</mapper>

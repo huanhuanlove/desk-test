@@ -1,0 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    width: 100%;
+}
+.header{
+    /*calc(10vh) -- 表示视窗高度的10%*/
+    height: calc(10vh);
+    width: 80%;
+    float: right;
+    background-color: #2b5c8d;
+}
+.leftmenus{
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    float: left;
+    background: red;
+    overflow: hidden;
+}
+.middle{
+    float: right;
+    height: calc(80vh);
+    width: 80%;
+    background-color: darkkhaki;
+}
+.footer{
+    position: absolute;
+    bottom: 0px;
+    left: 20%;
+    height: calc(10vh);
+    width: 80%;
+    background-color: palevioletred;
+}

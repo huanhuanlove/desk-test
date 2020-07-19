@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>index</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,600,700">
+    <link rel="stylesheet" type="text/css" href="../static/css/htmleaf-demo.css" th:href="@{../static/css/htmleaf-demo.css}">
+    <link rel="stylesheet" href="../static/css/demo.css" th:href="@{../static/css/demo.css}">
+    <link rel="stylesheet" href="../static/css/hc-mobile-nav.css" th:href="@{../static/css/hc-mobile-nav.css}">
+</head>
+<body>
+<div class="htmleaf-container">
+    <div id="container">
+        <header>
+        <div class="wrapper cf">
+            <nav id="main-nav">
+                <ul class="my-nav" th:if="${menu.page} eq '/'" th:each="menu, userStat : ${userMenus}">
+                    <li class="menus">
+                        <a th:text="${menu.name}" th:attr="menuid=${userStat.current.id}">1</a>
+                        <!--第二遍遍历-->
+                        <ul class="my2-nav">
+                            <li class="menu2" th:each="menu2, userStat : ${userMenus}" th:if="${menu.id} eq ${menu2.pid}">
+                                <a th:href="${menu2.page}" th:text="${menu2.name}">2</a>
+                                <!--第n次遍历-->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <a class="toggle">
+                <span></span>
+                展开-关闭
+            </a>
+        </div>
+    </header>
+
+        <!-- <main>
+            <div class="wrapper">
+                <div class="content">
+                    <h4>Chose side</h4>
+                    <div class="actions">
+                        <div><a href="#" data-demo="{side:'left'}" class="button active">Left side</a></div>
+                        <div><a href="#" data-demo="{side:'right'}" class="button">Right side</a></div>
+                    </div>
+                    <h4>Levels open</h4>
+                    <div class="actions">
+                        <div><a href="#" data-demo="{levelOpen:'overlap', levelSpacing:40}" class="button active">Overlap
+                            levels</a></div>
+                        <div><a href="#" data-demo="{levelOpen:'expand', levelSpacing:25}" class="button">Expand
+                            levels</a></div>
+                        <div><a href="#" data-demo="{levelOpen:false, levelSpacing:25}" class="button">Unfolded
+                            levels</a></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        -->
+        <script type="text/javascript" src="../static/js/jquery-1.11.0.min.js" th:src="@{../static/js/jquery-1.11.0.min.js}"></script>
+        <script type="text/javascript" src="../static/js/hc-mobile-nav.js" th:src="@{../static/js/hc-mobile-nav.js}"></script>
+        <script>
+            (function ($) {
+                var $nav = $('#main-nav');
+                var $toggle = $('.toggle');
+                var defaultData = {
+                    maxWidth: false,
+                    customToggle: $toggle,
+                    navTitle: 'All Categories',
+                    levelTitles: true
+                };
+
+                // we'll store our temp stuff here
+                var $clone = null;
+                var data = {};
+
+                // calling like this only for demo purposes
+
+                const initNav = function (conf) {
+                    if ($clone) {
+                        // clear previous instance
+                        $clone.remove();
+                    }
+
+                    // remove old toggle click event
+                    $toggle.off('click');
+
+                    // make new copy
+                    $clone = $nav.clone();
+
+                    // remember data
+                    $.extend(data, conf)
+
+                    // call the plugin
+                    $clone.hcMobileNav($.extend({}, defaultData, data));
+                }
+
+                // run first demo
+                initNav({});
+
+                $('.actions').find('a').on('click', function (e) {
+                    e.preventDefault();
+
+                    var $this = $(this).addClass('active');
+                    var $siblings = $this.parent().siblings().children('a').removeClass('active');
+
+                    initNav(eval('(' + $this.data('demo') + ')'));
+                });
+            })(jQuery);
+        </script>
+    </div>
+</div>
+</body>
+</html>
