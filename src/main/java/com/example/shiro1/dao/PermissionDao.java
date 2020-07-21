@@ -1,11 +1,10 @@
 package com.example.shiro1.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.shiro1.dto.PermissionDTO;
 import com.example.shiro1.entity.Permission;
-import com.example.shiro1.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -67,5 +66,10 @@ public interface PermissionDao extends BaseMapper<Permission> {
      * @return 影响行数
      */
     int deleteById(int id);
+
+    /***********************************************************************************************************/
+    /****************************************          shiro功能练习        ************************************/
+    /***********************************************************************************************************/
+    List<PermissionDTO> listPermissionByRoleName(String roleName);
 
 }

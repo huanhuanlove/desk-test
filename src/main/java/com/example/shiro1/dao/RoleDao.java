@@ -1,11 +1,10 @@
 package com.example.shiro1.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.shiro1.dto.RoleDTO;
 import com.example.shiro1.entity.Role;
-import com.example.shiro1.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -67,5 +66,17 @@ public interface RoleDao extends BaseMapper<Role> {
      * @return 影响行数
      */
     int deleteById(int id);
+
+    /**
+     * 通过用户名查出所有的角色
+     * @param userName
+     * @return
+     */
+    List<RoleDTO> getAllRoleByName(String userName);
+
+
+    /***********************************************************************************************************/
+    /****************************************          shiro功能练习        ************************************/
+    /***********************************************************************************************************/
 
 }

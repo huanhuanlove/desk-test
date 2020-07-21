@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,6 +19,7 @@
     <!--头部-->
     <div class="header" th:include="header :: header"></div>
     <!--左侧菜单-->
+    <!--<div shiro:hasRole="超级管理">超级管理可见</div>-->
     <div class="leftmenus" th:include="leftmenus :: leftmenus"></div>
     <!--中间可变部分-->
     <div class="middle">

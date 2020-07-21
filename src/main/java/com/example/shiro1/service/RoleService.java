@@ -1,6 +1,7 @@
 package com.example.shiro1.service;
 
 import com.example.shiro1.entity.Role;
+
 import java.util.List;
 
 /**
@@ -51,5 +52,4 @@ public interface RoleService {
      * @return 是否成功
      */
     boolean deleteById(int id);
-
 }

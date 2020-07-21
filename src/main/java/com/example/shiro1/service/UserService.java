@@ -1,5 +1,6 @@
 package com.example.shiro1.service;
 
+import com.example.shiro1.dto.UserDTO;
 import com.example.shiro1.entity.User;
 import com.example.shiro1.vo.UserAllMenuVO;
 import com.example.shiro1.vo.UserVO;
@@ -66,4 +67,10 @@ public interface UserService {
     void updateUser(UserVO userVO);
 
     void removeUser(int id);
+
+    /***********************************************************************************************************/
+    /****************************************          shiro功能练习        ************************************/
+    /***********************************************************************************************************/
+
+    UserDTO getUserDTOByName(String userName);
 }

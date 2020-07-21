@@ -1,5 +1,6 @@
 package com.example.shiro1.service.impl;
 
+import com.example.shiro1.dto.RoleDTO;
 import com.example.shiro1.entity.Role;
 import com.example.shiro1.dao.RoleDao;
 import com.example.shiro1.service.RoleService;
@@ -76,4 +77,5 @@ public class RoleServiceImpl implements RoleService {
     public boolean deleteById(int id) {
         return this.roleDao.deleteById(id) > 0;
     }
+
 }

@@ -95,4 +95,10 @@
         delete from shiro1.role where id = #{id}
     </delete>
 
+    <select id="getAllRoleByName" parameterType="string" resultType="com.example.shiro1.dto.RoleDTO">
+        select * from user u
+        left join user_role ur on u.id = ur.user_id
+        left join role r on r.id = ur.role_id
+        where u.username = #{userName}
+    </select>
 </mapper>

@@ -123,4 +123,11 @@
         delete from shiro1.permission where id = #{id}
     </delete>
 
+    <select id="listPermissionByRoleName" parameterType="string" resultType="com.example.shiro1.dto.PermissionDTO">
+        select * from role r
+        left join role_permission up on r.id = up.role_id
+        left join permission p on p.id = up.permit_id
+        where r.role_name = #{roleName}
+    </select>
+
 </mapper>
